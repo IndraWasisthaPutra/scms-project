@@ -1,0 +1,101 @@
+ingredients = [
+    ("coffee", 10),
+    ("milk", 3),
+    ("sugar", 7),
+    ("chocolate", 2)
+]
+
+def show_inventory():
+    for i in range (len(ingredients)):
+        nama = ingredients[i][0]
+        stock = ingredients[i][1]
+
+        print (nama, "-", stock)
+
+def add_ingredient():
+    nama = input("Masukan jenis item: ")
+    jumlah = int(input("Masukan jumlah stock: "))
+
+    ingredientsupdated = ingredients.copy()
+
+    for i in range(len(ingredientsupdated)):
+        if nama == ingredientsupdated[i][0]:
+            ingredientsupdated[i] = (ingredientsupdated[i][0],ingredientsupdated[i][1] + jumlah)
+            break
+        print(ingredientsupdated)
+    for i in range(len(ingredientsupdated)):
+        if nama != ingredientsupdated[i][0]:
+            ingredientsupdated.append((nama, jumlah))
+            break
+        print (ingredientsupdated)
+
+def update_stock():
+    nama = input("Masukan jenis item: ")
+
+    for i in ingredients:
+        if nama == ingredients[i][0]:
+            jumlah = int(input("Masukan jumlah item: "))
+            
+            jumlahbaru = ingredients[i][1] + jumlah
+            ingredients[i] = (ingredients[i][0], jumlahbaru)
+            print ("Stock updated: ", nama, "-", jumlahbaru )
+        else:
+            print ("error")
+
+def check_low_stock():
+    for i in range(len(ingredients)):
+        nama = ingredients[i][0]
+        stock = ingredients[i][1]
+
+        if ingredients[i][1] < 5:
+            print (nama, "-", stock, "LOW STOCK")
+
+
+def sort_inventory():
+    ingredientssorted = ingredients.copy()
+    for i in range(len(ingredientssorted)):
+        nama = ingredientssorted[i][0]
+        stock = ingredientssorted[i][1]
+        for j in range(len(ingredientssorted)-1):
+            if ingredientssorted[j][1] > ingredientssorted[j+1][1]:
+                ingredientssorted[j], ingredientssorted[j+1] = ingredientssorted[j+1], ingredientssorted[j]
+    print (ingredientssorted)
+
+def search_ingredient():
+    nama = input("Masukan jenis item: ")
+
+    for i in ingredients:
+        if nama == ingredients[i][0]:
+            print (nama, "-", ingredients[i][1])
+        else:
+            print ("Item tidak ada")
+
+
+while True:
+    print ("1 Show inventory")
+    print ("2 Add ingredient")
+    print ("3 Update stock")
+    print ("4 Check low stock")
+    print ("5 Sort inventory")
+    print ("6 Search ingredient")
+    print ("7 Exit")
+
+    tombol = int(input(""))
+
+    if tombol == 7:
+        print ("Goodbye")
+        break
+    elif tombol == 1:
+        show_inventory()
+    elif tombol == 2:
+        add_ingredient()
+    elif tombol == 3:
+        update_stock()
+    elif tombol == 4:
+        check_low_stock()
+    elif tombol == 5:
+        sort_inventory()
+    elif tombol == 6:
+        search_ingredient()
+    else :
+        print ("Error")
